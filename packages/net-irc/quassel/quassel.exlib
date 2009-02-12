@@ -1,6 +1,8 @@
 # Copyright 2008 Arne Janbu <arnej@ampheus.de>
 # Distributed under the terms of the GNU General Public License v2
 
+require cmake
+
 SUMMARY="Quassel is a Qt-4 based IRC-client using a client-server architecture"
 HOMEPAGE="http://quassel-irc.org/"
 
@@ -35,10 +37,10 @@ CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'kde KDE'
     'phonon PHONON'
 )
-src_compile() {
-    cmake --prefix=/usr . || die "cmake failed."
-    emake
-}
+
+CMAKE_SRC_CONFIGURE_BUILDS=(
+    '--prefix=/usr'
+)
 
 src_install() {
     default
