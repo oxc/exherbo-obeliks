@@ -1,0 +1,50 @@
+# Copyright 2008 Arne Janbu <arnej@ampheus.de>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Quassel is a Qt-4 based IRC-client using a client-server architecture"
+HOMEPAGE="http://quassel-irc.org/"
+
+LICENCES="GPL-3"
+SLOT="0"
+
+MYOPTIONS="core dbus kde phonon ssl X webkit"
+DEPENDENCIES="
+    build:
+        x11-libs/qt:4
+	>=sys-devel/cmake-2.6
+
+    build+run:
+    	x11-libs/qt[sqlite]
+        dbus? ( x11-libs/qt[dbus] )
+        X? (
+                kde? ( >=kde/kdelibs-4.1 )
+                phonon? ( media-libs/phonon )
+                webkit? ( x11-libs/qt[webkit] )
+        )
+        ssl? ( 
+		dev-libs/openssl
+		x11-libs/qt[ssl]
+	)"
+
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 
+    'ssl OPENSSL'
+    'X QTCLIENT'
+    'webkit WEBKIT'
+    'dbus DBUS'
+    'core CORE'
+    'kde KDE'
+    'phonon PHONON'
+)
+src_compile() {
+    cmake --prefix=/usr . || die "cmake failed."
+    emake
+}
+
+src_install() {
+    default
+    
+    if optionq core ; then
+        newinitd "${FILES}"/quasselcore.init quasselcore
+        newconfd "${FILES}"/quasselcore.conf quasselcore
+    fi
+}
