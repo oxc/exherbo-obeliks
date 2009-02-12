@@ -15,12 +15,11 @@ MYOPTIONS="core dbus kde phonon ssl X webkit"
 DEPENDENCIES="
     build:
         x11-libs/qt:4
-      >=sys-devel/cmake-2.6
 
     build+run:
         x11-libs/qt:4[sqlite]
         X? (
-            kde? ( >=kde/kdelibs-4.1 )
+            kde? ( >=kde/kdelibs-4.1:4 )
             phonon? ( media-libs/phonon )
             webkit? ( x11-libs/qt:4[webkit] )
         )
