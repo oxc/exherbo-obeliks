@@ -38,13 +38,7 @@ CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'phonon PHONON'
 )
 
-CMAKE_SRC_CONFIGURE_BUILDS=(
-    '--prefix=/usr'
-)
-
-src_install() {
-    default
-    
+pkg_preinst() {
     if optionq core ; then
         newinitd "${FILES}"/quasselcore.init quasselcore
         newconfd "${FILES}"/quasselcore.conf quasselcore
