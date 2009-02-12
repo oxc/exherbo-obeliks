@@ -13,22 +13,23 @@ MYOPTIONS="core dbus kde phonon ssl X webkit"
 DEPENDENCIES="
     build:
         x11-libs/qt:4
-	>=sys-devel/cmake-2.6
+      >=sys-devel/cmake-2.6
 
     build+run:
-    	x11-libs/qt[sqlite]
-        dbus? ( x11-libs/qt[dbus] )
+        x11-libs/qt[sqlite]
         X? (
-                kde? ( >=kde/kdelibs-4.1 )
-                phonon? ( media-libs/phonon )
-                webkit? ( x11-libs/qt[webkit] )
+            kde? ( >=kde/kdelibs-4.1 )
+            phonon? ( media-libs/phonon )
+            webkit? ( x11-libs/qt[webkit] )
         )
-        ssl? ( 
-		dev-libs/openssl
-		x11-libs/qt[ssl]
-	)"
+        dbus? ( x11-libs/qt[dbus] )
+        ssl? (
+            dev-libs/openssl
+            x11-libs/qt[ssl]
+        )
+"
 
-CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'ssl OPENSSL'
     'X QTCLIENT'
     'webkit WEBKIT'
