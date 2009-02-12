@@ -39,7 +39,9 @@ CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'phonon PHONON'
 )
 
-pkg_preinst() {
+src_install() {
+    cmake_src_install
+
     if optionq core ; then
         newinitd "${FILES}"/quasselcore.init quasselcore
         newconfd "${FILES}"/quasselcore.conf quasselcore
