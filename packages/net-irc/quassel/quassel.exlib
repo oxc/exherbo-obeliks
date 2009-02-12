@@ -18,16 +18,16 @@ DEPENDENCIES="
       >=sys-devel/cmake-2.6
 
     build+run:
-        x11-libs/qt[sqlite]
+        x11-libs/qt:4[sqlite]
         X? (
             kde? ( >=kde/kdelibs-4.1 )
             phonon? ( media-libs/phonon )
-            webkit? ( x11-libs/qt[webkit] )
+            webkit? ( x11-libs/qt:4[webkit] )
         )
-        dbus? ( x11-libs/qt[dbus] )
+        dbus? ( x11-libs/qt:4[dbus] )
         ssl? (
             dev-libs/openssl
-            x11-libs/qt[ssl]
+            x11-libs/qt:4[ssl]
         )
 "
 
