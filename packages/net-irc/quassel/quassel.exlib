@@ -32,12 +32,15 @@ DEPENDENCIES="
 
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'ssl OPENSSL'
-    'X QTCLIENT'
     'webkit WEBKIT'
     'dbus DBUS'
-    'core CORE'
     'kde KDE'
     'phonon PHONON'
+)
+
+CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
+    'X QTCLIENT'
+    'core CORE'
 )
 
 quassel_src_configure() {
