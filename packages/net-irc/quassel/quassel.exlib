@@ -3,7 +3,7 @@
 
 require cmake
 
-export_exlib_phases src_install
+export_exlib_phases src_configure src_install
 
 SUMMARY="Quassel is a Qt-4 based IRC-client using a client-server architecture"
 HOMEPAGE="http://quassel-irc.org/"
@@ -39,6 +39,10 @@ CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'kde KDE'
     'phonon PHONON'
 )
+
+quassel_src_configure() {
+    cmake_src_configure
+}
 
 quassel_src_install() {
     cmake_src_install

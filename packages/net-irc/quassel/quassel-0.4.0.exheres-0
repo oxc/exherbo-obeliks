@@ -1,0 +1,9 @@
+# Copyright 2008 Arne Janbu <arnej@ampheus.de>
+# Distributed under the terms of the GNU General Public License v2
+
+DOWNLOADS="${HOMEPAGE}/pub/${PNV}.tar.bz2"
+
+require ${PN}
+
+PLATFORMS="~x86"
+
