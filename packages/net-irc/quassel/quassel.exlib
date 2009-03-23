@@ -51,7 +51,7 @@ quassel_src_install() {
     cmake_src_install
 
     if optionq core ; then
-        newinitd "${FILES}"/quasselcore.init quasselcore
-        newconfd "${FILES}"/quasselcore.conf quasselcore
+        hereinitd "${FILES}"/quasselcore
+        hereconfd "${FILES}"/quasselcore.conf
     fi
 }
