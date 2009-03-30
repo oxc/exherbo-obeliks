@@ -3,7 +3,7 @@
 
 DOWNLOADS="${HOMEPAGE}/pub/${PNV}.tar.bz2"
 
-require ${PN}
+require quassel
 
 PLATFORMS="~x86"
 

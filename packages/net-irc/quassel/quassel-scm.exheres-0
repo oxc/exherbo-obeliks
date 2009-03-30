@@ -3,4 +3,4 @@
 
 SCM_REPOSITORY="git://git.quassel-irc.org/quassel.git"
 
-require scm-git ${PN}
+require scm-git quassel
