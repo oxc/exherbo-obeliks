@@ -11,7 +11,16 @@ HOMEPAGE="http://quassel-irc.org/"
 LICENCES="GPL-3"
 SLOT="0"
 
-MYOPTIONS="core dbus kde phonon ssl X webkit"
+LANGS="cs da de fr hu nb ru sl tr"
+MYOPTIONS="
+    core
+    dbus
+    kde
+    phonon
+    ssl
+    X
+    webkit
+    linguas: ${LANGS} [[ number-selected = at-least-one ]]"
 DEPENDENCIES="
     build:
         x11-libs/qt:4
@@ -44,6 +53,12 @@ CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
 )
 
 quassel_src_configure() {
+    for lang in ${LANGS}; do
+        if optionq linguas:${lang} ; then
+            QUASSELLANGS+="${lang}"
+        fi
+    done
+    CMAKE_SRC_CONFIGURE_PARAMS+=( -DLINGUAS="${QUASSELLANGS}" )
     cmake_src_configure
 }
 
