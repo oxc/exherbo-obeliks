@@ -20,7 +20,7 @@ MYOPTIONS="
     ssl
     X
     webkit
-    linguas: ${LANGS} [[ number-selected = at-least-one ]]"
+    linguas: ${LANGS}"
 DEPENDENCIES="
     build:
         x11-libs/qt:4
