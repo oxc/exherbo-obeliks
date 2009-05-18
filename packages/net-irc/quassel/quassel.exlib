@@ -3,7 +3,7 @@
 
 require cmake
 
-export_exlib_phases src_install
+export_exlib_phases src_prepare src_install
 
 SUMMARY="Quassel is a Qt-4 based IRC-client using a client-server architecture"
 HOMEPAGE="http://quassel-irc.org/"
@@ -39,13 +39,6 @@ DEPENDENCIES="
         )
 "
 
-for lang in ${LANGS}; do
-    if optionq linguas:${lang} ; then
-        QUASSELLANGS+="${lang}"
-    fi
-done
-CMAKE_SRC_CONFIGURE_PARAMS+=( -DLINGUAS="${QUASSELLANGS}" )
-
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'ssl OPENSSL'
     'webkit WEBKIT'
@@ -58,6 +51,14 @@ CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
     'X QTCLIENT'
     'core CORE'
 )
+quassel_src_prepare() {
+    for lang in ${LANGS}; do
+        if optionq linguas:${lang} ; then
+            QUASSELLANGS+="${lang}"
+        fi
+    done
+    CMAKE_SRC_CONFIGURE_PARAMS+=( -DLINGUAS=${QUASSELLANGS} )
+}
 
 quassel_src_install() {
     cmake_src_install
