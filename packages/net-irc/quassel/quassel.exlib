@@ -28,7 +28,7 @@ DEPENDENCIES="
     build+run:
         x11-libs/qt:4[sqlite]
         X? (
-            kde? ( >=kde/kdelibs-4.1:4 )
+            kde? ( kde/kdelibs:4[>=4.1] )
             phonon? ( media-libs/phonon )
             webkit? ( x11-libs/qt:4[webkit] )
         )
