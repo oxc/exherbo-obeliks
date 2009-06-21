@@ -16,10 +16,11 @@ MYOPTIONS="
     core
     dbus
     kde
+    monolithic
     phonon
     ssl
-    X
     webkit
+    X
     linguas: ${LANGS}"
 DEPENDENCIES="
     build:
@@ -50,6 +51,7 @@ CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
 CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
     'X QTCLIENT'
     'core CORE'
+    'monolithic MONO'
 )
 quassel_src_prepare() {
     for lang in ${LANGS}; do
