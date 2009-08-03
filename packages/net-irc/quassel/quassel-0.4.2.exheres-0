@@ -5,5 +5,5 @@ DOWNLOADS="http://quassel-irc.org/pub/${PNV}.tar.bz2"
 
 require quassel
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
