@@ -1,0 +1,27 @@
+# Copyright 2010 Bernhard Frauendienst
+# Distributed under the terms of the GNU General Public License v2
+# Parts based on 'libhx-3.4.ebuild' from Gentoo, which is
+#     Copyright 1999-2010 Gentoo Foundation
+
+MY_PNV="libHX-${PV}"
+
+SUMMARY="Platform independent library providing basic system functions."
+HOMEPAGE="http://libhx.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/${PN}/${MY_PNV}.tar.xz"
+
+LICENCES="|| ( GPL-3 LGPL-3 )"
+SLOT="0"
+PLATFORMS="~amd64"
+
+DEPENDENCIES="
+    build:
+        app-arch/xz
+"
+
+REMOTE_IDS="sourceforge:libhx"
+
+WORK="${WORKBASE}/${MY_PNV}"
+
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=( "doc/*.txt" )
+
+
