@@ -3,9 +3,12 @@
 # Based in part upon 'pam_mount-2.4.ebuild' from Gentoo, which is:
 #     Copyright 1999-2010 Gentoo Foundation
 
+require sourceforge [ project=${PN/_/-} suffix=tar.xz ] multilib
+
+SLOT="0"
+LICENCES="|| ( GPL-3 LGPL-3 )"
+
 SUMMARY="A PAM module that can mount volumes for a user session"
-HOMEPAGE="http://pam-mount.sourceforge.net"
-DOWNLOADS="mirror://sourceforge/pam-mount/${PNV}.tar.xz"
 DESCRIPTION="
 This module is aimed at environments with central file servers that a user wishes to mount on login
 and unmount on logout, such as (semi-)diskless stations where many users can logon and where
@@ -24,31 +27,27 @@ with extra code to make sure certain volumes are set up properly because often t
 just a mount call, such as encrypted volumes. This includes SMB/CIFS, NCP, FUSE, dm-crypt and LUKS.
 "
 
-LICENCES="|| ( GPL-3 LGPL-3 )"
-SLOT="0"
 PLATFORMS="~amd64"
 
-REMOTE_IDS="sourceforge:pam-mount"
-
 MYOPTIONS="
-    ssl [[ description = [ Use OpenSSL for cryptography ] ]]
     crypt [[ description = [ Use libcryptsetup for dm-crypt and LUKS support ] ]]
+    ssl [[ description = [ Use OpenSSL for cryptography ] ]]
 "
 
 DEPENDENCIES="
     build:
-	app-arch/xz
+        app-arch/xz
     build+run:
+        dev-libs/libxml2[>=2.6]
+        dev-util/pkg-config[>=0.19]
+        sys-libs/libhx[>=3.4]
         sys-libs/pam[>=0.99]
-	sys-libs/libhx[>=3.4]
-	dev-libs/libxml2[>=2.6]
-	dev-util/pkg-config[>=0.19]
-	ssl? ( dev-libs/openssl[>=0.9.8] )
-	crypt? ( sys-fs/cryptsetup[>=1.1.2] )
+        crypt? ( sys-fs/cryptsetup[>=1.1.2] )
+        ssl? ( dev-libs/openssl[>=0.9.8] )
 "
 
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "ssl crypto" "crypt cryptsetup" )
-DEFAULT_SRC_CONFIGURE_PARAMS=( --with-slibdir="/${LIBDIR}" --localstatedir=/var --with-dtd )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --with-slibdir="/$(get_libdir)" --localstatedir=/var --with-dtd )
 
 src_install() {
     default

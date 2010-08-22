@@ -5,12 +5,13 @@
 
 MY_PNV="libHX-${PV}"
 
-SUMMARY="Platform independent library providing basic system functions."
-HOMEPAGE="http://libhx.sourceforge.net"
-DOWNLOADS="mirror://sourceforge/${PN}/${MY_PNV}.tar.xz"
+require sourceforge [ suffix=tar.xz ]
 
-LICENCES="|| ( GPL-3 LGPL-3 )"
 SLOT="0"
+LICENCES="|| ( GPL-3 LGPL-3 )"
+
+SUMMARY="Platform independent library providing basic system functions"
+
 PLATFORMS="~amd64"
 
 DEPENDENCIES="
@@ -18,10 +19,5 @@ DEPENDENCIES="
         app-arch/xz
 "
 
-REMOTE_IDS="sourceforge:libhx"
-
 WORK="${WORKBASE}/${MY_PNV}"
-
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=( "doc/*.txt" )
-
 
