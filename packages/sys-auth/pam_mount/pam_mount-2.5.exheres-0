@@ -37,9 +37,9 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         app-arch/xz
+        dev-util/pkg-config[>=0.19]
     build+run:
         dev-libs/libxml2[>=2.6]
-        dev-util/pkg-config[>=0.19]
         sys-libs/libhx[>=3.4]
         sys-libs/pam[>=0.99]
         crypt? ( sys-fs/cryptsetup[>=1.1.2] )
