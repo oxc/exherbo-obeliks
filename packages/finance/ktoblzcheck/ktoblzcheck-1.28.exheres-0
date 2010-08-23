@@ -13,7 +13,7 @@ MYOPTIONS="python"
 
 DEPENDENCIES="
     build+run:
-        python? ( dev-lang/python[>=2.5] )
+        python? ( dev-lang/python:= )
 "
 
 BUGS_TO="exherbo@nospam.obeliks.de"

@@ -36,7 +36,6 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        app-arch/xz
         dev-util/pkg-config[>=0.19]
     build+run:
         dev-libs/libxml2[>=2.6]

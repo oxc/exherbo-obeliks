@@ -27,7 +27,7 @@ src_prepare() {
 
 src_configure() {
     local backends="aqhbci aqnone"
-    option ofx && backends+="aqofxconnect"
+    option ofx && backends+=" aqofxconnect"
 
     econf \
         --with-docpath=/usr/share/doc/${PNVR}/apidoc \
