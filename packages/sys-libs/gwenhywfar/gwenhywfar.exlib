@@ -25,7 +25,6 @@ DEPENDENCIES="
 WORK="${WORKBASE}/${MY_PNV}"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( 
-    "--disable-dependency-tracking"
     "--with-docpath=/usr/share/doc/${PNVR}/apidoc" 
 )
 
