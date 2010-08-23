@@ -10,11 +10,10 @@ PLATFORMS="~amd64 ~x86"
 DEPENDENCIES="
     build+run:
         sys-libs/gwenhywfar[>=3.11.3]
-        chipcard? ( sys-libs/libchipcard[>=4.2.9] )
         ofx? ( finance/libofx[>=0.9.1] )
 "
 
-MYOPTIONS="chipcard debug ofx"
+MYOPTIONS="debug ofx"
 
 # parallel make fails
 DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
