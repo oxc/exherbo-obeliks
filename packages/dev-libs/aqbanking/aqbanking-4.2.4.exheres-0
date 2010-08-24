@@ -13,7 +13,10 @@ DEPENDENCIES="
         ofx? ( finance/libofx[>=0.9.1] )
 "
 
-MYOPTIONS="debug ofx"
+MYOPTIONS="
+    debug 
+    ofx [[ description = [ Enable backend for OFX (Open Financial eXchange) Direct Connect ] ]]
+"
 
 # parallel make fails
 DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
