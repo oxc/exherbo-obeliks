@@ -20,5 +20,7 @@ DEPENDENCIES="
         finance/ktoblzcheck[>=1.10]
 "
 
+REMOTE_IDS="freshmeat:AqBanking"
+
 WORK="${WORKBASE}/${MY_PNV}"
 
