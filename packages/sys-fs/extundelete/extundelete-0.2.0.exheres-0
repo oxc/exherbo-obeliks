@@ -1,0 +1,23 @@
+
+require sourceforge
+
+SUMMARY="Extundelete is a utility to undelete files from an ext3 or ext4 partition"
+DESCRIPTION="extundelete is a utility that can recover deleted files from an ext3 or ext4 partition.
+The ext3 file system is the most common file system when using Linux, and ext4 is its successor.
+extundelete uses the information stored in the partition's journal to attempt to recover a file that
+has been deleted from the partition. There is no guarantee that any particular file will be able to
+be undeleted, so always try to have a good backup system in place, or at least put one in place
+after recovering your files!"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sys-fs/e2fsprogs
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( "--hates=docdir" )
+
