@@ -14,6 +14,7 @@ SLOT="0"
 LANGS="cs da de fr hu nb ru sl tr"
 MYOPTIONS="
     baselayout
+    client
     core
     dbus
     kde
@@ -21,7 +22,6 @@ MYOPTIONS="
     phonon
     ssl
     webkit
-    X
     linguas: ${LANGS}"
 DEPENDENCIES="
     build:
@@ -29,7 +29,7 @@ DEPENDENCIES="
 
     build+run:
         x11-libs/qt:4[sqlite]
-        X? (
+        client? (
             kde? ( kde/kdelibs:4[>=4.1] )
             phonon? ( media-libs/phonon )
             webkit? ( x11-libs/qt:4[webkit] )
@@ -50,7 +50,7 @@ CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
 )
 
 CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
-    'X QTCLIENT'
+    'client QTCLIENT'
     'core CORE'
     'monolithic MONO'
 )
