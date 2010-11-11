@@ -1,4 +1,5 @@
 # Copyright 2008 Arne Janbu <arnej@ampheus.de>
+# Copyright 2010 Joonas Sarajärvi <muepsj@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require cmake
@@ -11,42 +12,78 @@ HOMEPAGE="http://quassel-irc.org/"
 LICENCES="GPL-3"
 SLOT="0"
 
-LANGS="cs da de fr hu nb ru sl tr"
+LANGS="cs da de el en_GB es fi fr gl hu it ja nb nl oc pt_BR pt ru sl sq sv tr uk zh_CN"
 MYOPTIONS="
     baselayout
-    client
-    core
-    dbus
-    kde
-    monolithic
-    phonon
-    ssl
-    webkit
-    linguas: ${LANGS}"
-DEPENDENCIES="
-    build:
-        x11-libs/qt:4
+    client [[ description = [ Build the core-dependent Quassel client ] ]]
+    crypt [[ description = [ Use encryption support in the core ] ]]
+    core [[ description = [ Build the Quassel core ] ]]
+    dbus [[ description = [ Use dbus for desktop integration features ] ]]
+    kde [[ description = [ Integrate better with KDE ] ]]
+    libindicate [[ description = [ Use libindicate for Ayatana notifications ] ]]
+    monolithic [[ description = [ Build a standalone IRC client ] ]]
+    phonon [[ description = [ Use the phonon multimedia API instead of whole kdelibs ] ]]
+    webkit [[ description = [ Use Webkit for URL previews ] ]]
 
+    baselayout [[ requires = core ]]
+    crypt [[ requires = core ]]
+    dbus? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    kde? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    libindicate? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    phonon? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    webkit? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+
+    ( client core monolithic ) [[ number-selected = at-least-one ]]
+    ( kde phonon ) [[ number-selected = at-most-one ]]
+
+    linguas: ${LANGS}
+"
+DEPENDENCIES="
     build+run:
-        x11-libs/qt:4[sqlite]
+        dev-libs/openssl
+        x11-libs/qt:4[ssl][>=4.4]
+
         client? (
-            kde? ( kde/kdelibs:4[>=4.1] )
-            phonon? ( media-libs/phonon )
-            webkit? ( x11-libs/qt:4[webkit] )
+            x11-libs/qt:4[X][>=4.6]
         )
-        dbus? ( x11-libs/qt:4[dbus] )
-        ssl? (
-            dev-libs/openssl
-            x11-libs/qt:4[ssl]
+        core? (
+            x11-libs/qt:4[sqlite]
+        )
+        crypt? (
+             app-crypt/qca:2
+        )
+        dbus? (
+            x11-libs/dbusmenu-qt
+            x11-libs/qt:4[dbus]
+        )
+        kde? (
+            kde/kdelibs:4[>=4.1]
+        )
+        libindicate? (
+            dev-libs/indicate-qt[>=0.2.1]
+        )
+        monolithic? (
+            x11-libs/qt:4[X][>=4.6]
+        )
+        phonon? (
+            media-libs/phonon
+        )
+        webkit? (
+            x11-libs/qt:4[webkit]
         )
 "
 
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DWITH_OPENSSL=TRUE
+)
+
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
-    'ssl OPENSSL'
-    'webkit WEBKIT'
+    'crypt CRYPT'
     'dbus DBUS'
     'kde KDE'
+    'libindicate LIBINDICATE'
     'phonon PHONON'
+    'webkit WEBKIT'
 )
 
 CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
