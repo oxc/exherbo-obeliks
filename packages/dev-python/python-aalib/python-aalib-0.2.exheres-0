@@ -1,0 +1,18 @@
+# Copyright 2010 Bernhard Frauendienst
+# Distributed under the terms of the GNU General Public License v2
+
+require distutils
+
+SUMMARY="python-aalib is a set of bindings for AAlib, an ASCII art library."
+DESCRIPTION=""
+HOMEPAGE="http://jwilk.net/software/python-aalib"
+DOWNLOADS="http://pypi.python.org/packages/source/${PN:0:1}/${PN}/${PNV}.tar.gz"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+
+DEPENDENCIES="
+    build+run:
+        media-libs/aalib
+"
