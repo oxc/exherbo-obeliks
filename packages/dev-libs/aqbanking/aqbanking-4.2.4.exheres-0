@@ -9,6 +9,7 @@ PLATFORMS="~amd64 ~x86"
 
 DEPENDENCIES="
     build+run:
+        finance/ktoblzcheck[>=1.10]
         sys-libs/gwenhywfar[>=3.11.3]
         ofx? ( finance/libofx[>=0.9.1] )
         qt4? ( x11-libs/qt:4[qt3support] )
