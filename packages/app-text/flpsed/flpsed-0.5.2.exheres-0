@@ -1,0 +1,25 @@
+# Copyright 2011 Bernhard Frauendienst
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="A WYSIWYG PostScript annotator"
+DESCRIPTION="
+flpsed is a WYSIWYG PostScript annotator. You can't actually edit existing documents, but you can
+add arbitrary text lines to existing documents. Added lines can later be re-edited with flpsed.
+Using pdftops, flpsed can import PDF documents and also add text to them. It is useful for filling
+in forms, adding notes, etc. In batch mode, it can be used to automate form filling.
+"
+HOMEPAGE="http://flpsed.org/flpsed.html"
+DOWNLOADS="http://www.ecademix.com/JohannesHofmann/${PNV}.tar.gz"
+
+LICENCES="GPL"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+
+DEPENDENCIES="
+    build+run:
+        x11-libs/fltk:1[>=1.1]
+        x11-libs/libX11
+    run:
+        app-text/ghostscript
+"
+
