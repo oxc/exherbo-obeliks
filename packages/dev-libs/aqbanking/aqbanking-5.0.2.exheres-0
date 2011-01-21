@@ -1,7 +1,7 @@
 # Copyright 2010 Bernhard Frauendienst
 # Distributed under the terms of the GNU General Public License v2
 
-require aqbanking [ release=74 ]
+require aqbanking [ release=75 ]
 
 PLATFORMS="~amd64 ~x86"
 
