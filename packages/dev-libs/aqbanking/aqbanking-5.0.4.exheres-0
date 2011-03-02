@@ -1,7 +1,7 @@
 # Copyright 2010 Bernhard Frauendienst
 # Distributed under the terms of the GNU General Public License v2
 
-require aqbanking [ release=75 ]
+require aqbanking [ release=77 ]
 
 PLATFORMS="~amd64 ~x86"
 
@@ -30,7 +30,7 @@ DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
 
 src_configure() {
     local backends="aqhbci aqnone"
-    option ofx && backends+=" aqofxconnect" || ewarn "The build system fails if the aqofxconnect backend is deselected"
+    option ofx && backends+=" aqofxconnect"
     option paypal && backends+=" aqpaypal"
 
     econf \
