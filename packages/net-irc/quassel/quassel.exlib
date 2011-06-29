@@ -45,7 +45,7 @@ DEPENDENCIES="
         x11-libs/qt:4[ssl][>=4.4]
 
         client? (
-            x11-libs/qt:4[X][>=4.6]
+            x11-libs/qt:4[>=4.6][X(+)]
         )
         core? (
             x11-libs/qt:4[sqlite]
@@ -64,7 +64,7 @@ DEPENDENCIES="
             dev-libs/indicate-qt[>=0.2.1]
         )
         monolithic? (
-            x11-libs/qt:4[X][>=4.6]
+            x11-libs/qt:4[>=4.6][X(+)]
         )
         phonon? (
             media-libs/phonon
