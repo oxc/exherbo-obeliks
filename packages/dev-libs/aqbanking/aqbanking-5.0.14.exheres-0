@@ -1,7 +1,7 @@
 # Copyright 2010 Bernhard Frauendienst
 # Distributed under the terms of the GNU General Public License v2
 
-require aqbanking [ release=77 ]
+require aqbanking [ release=85 ]
 
 PLATFORMS="~amd64 ~x86"
 
@@ -11,7 +11,7 @@ DEPENDENCIES="
         dev-libs/gnutls
         dev-libs/libtasn1
         finance/ktoblzcheck[>=1.10]
-        sys-libs/gwenhywfar[>=4.0.0.0]
+        sys-libs/gwenhywfar[>=4.2.1]
         chipcard? ( sys-libs/libchipcard[>=4.2.9] )
         ofx? ( finance/libofx[>=0.9.1] )
 "
