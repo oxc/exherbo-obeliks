@@ -38,19 +38,20 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config[>=0.19]
     build+run:
+        sys-apps/util-linux[>=2.20]
         dev-libs/libxml2[>=2.6]
-        sys-libs/libhx[>=3.4]
-        sys-libs/pam[>=0.99]
+        sys-libs/libhx[>=3.12.1]
+        sys-libs/pam
         crypt? ( sys-fs/cryptsetup[>=1.1.2] )
         ssl? ( dev-libs/openssl[>=0.9.8] )
 "
 
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "ssl crypto" "crypt cryptsetup" )
-DEFAULT_SRC_CONFIGURE_PARAMS=( --with-slibdir="/$(get_libdir)" --localstatedir=/var --with-dtd )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --with-slibdir="/${LIBDIR}" --with-dtd )
 
 src_install() {
     default
     dodoc doc/*.txt
-    keepdir /var/run/${PN}
+    keepdir /var/lib/run/${PN}
 }
 
