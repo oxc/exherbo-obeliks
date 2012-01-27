@@ -13,6 +13,9 @@ SLOT="0"
 DOWNLOADS="http://www.aquamaniac.de/sites/download/download.php?package=$(exparam package)&release=$(exparam release)&file=$(exparam file)&dummy=${MY_FILENAME} -> ${MY_FILENAME}"
 HOMEPAGE="http://www.aquamaniac.de/aqbanking"
 LICENCES="GPL-2"
+if ever at_least 5.0.17; then
+    LICENCES+=" GPL-3"
+fi
 SUMMARY="Free Online Banking library"
 
 REMOTE_IDS="freshmeat:AqBanking"

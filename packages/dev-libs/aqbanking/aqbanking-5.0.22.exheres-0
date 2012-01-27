@@ -25,7 +25,7 @@ MYOPTIONS="
     paypal [[ description = [ backend for PayPal (has different licencing) ] ]]
 "
 
-LICENCES+=" GPL-3 paypal? ( AqPaypal )"
+LICENCES+=" paypal? ( AqPaypal )"
 
 # parallel make fails
 DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
