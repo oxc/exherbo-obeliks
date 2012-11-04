@@ -27,7 +27,7 @@ with extra code to make sure certain volumes are set up properly because often t
 just a mount call, such as encrypted volumes. This includes SMB/CIFS, NCP, FUSE, dm-crypt and LUKS.
 "
 
-PLATFORMS="~amd64"
+PLATFORMS="~amd64 ~x86"
 
 MYOPTIONS="
     crypt [[ description = [ Use libcryptsetup for dm-crypt and LUKS support ] ]]
