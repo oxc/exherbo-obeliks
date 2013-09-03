@@ -42,7 +42,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         dev-libs/openssl
-        x11-libs/qt:4[ssl][>=4.4]
+        x11-libs/qt:4[ssl(+)][>=4.4]
 
         client? (
             x11-libs/qt:4[>=4.6][X(+)]
