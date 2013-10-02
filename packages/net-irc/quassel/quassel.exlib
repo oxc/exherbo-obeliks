@@ -2,7 +2,7 @@
 # Copyright 2010 Joonas Sarajärvi <muepsj@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake
+require cmake [ api=2 ]
 
 export_exlib_phases src_prepare src_install
 
