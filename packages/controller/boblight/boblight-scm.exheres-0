@@ -16,19 +16,27 @@ Boblight uses a client/server model, where clients are responsible for translati
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS="ffmpeg opengl portaudio"
+MYOPTIONS="
+    X
+    portaudio
+    (
+        ffmpeg
+        opengl
+    ) [[ *requires = X ]]"
 
 DEPENDENCIES="
     build:
     build+run:
-        x11-libs/libX11
-        ffmpeg? ( media/ffmpeg )
+        X? ( x11-libs/libX11 )
+        ffmpeg? ( media/ffmpeg[<2] )
         opengl? ( x11-dri/mesa )
         portaudio? ( media-libs/portaudio )
 "
 
+
 BUGS_TO="exherbo@nospam.obeliks.de"
 
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "ffmpeg ffmpeg check" "opengl opengl check" "portaudio portaudio check" )
+DEFAULT_SRC_CONFIGURE_OPTIONS=( "ffmpeg with-ffmpeg" ) # without-ffmpeg is broken, see https://code.google.com/p/boblight/issues/detail?id=53
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "X x11" "opengl" "portaudio" )
 
 
