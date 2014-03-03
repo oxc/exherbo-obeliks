@@ -17,7 +17,7 @@ PLATFORMS="~amd64 ~x86"
 
 DEPENDENCIES="
     build+run:
-        x11-libs/fltk:1[>=1.1]
+        x11-libs/fltk[>=1.3]
         x11-libs/libX11
     run:
         app-text/ghostscript
