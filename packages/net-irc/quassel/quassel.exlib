@@ -68,7 +68,17 @@ DEPENDENCIES="
             )
         )
         kde? (
-            kde/kdelibs:4[>=4.1]
+            qt4? (
+                kde/kdelibs:4[>=4.1]
+            )
+            qt5? (
+                kde-frameworks/kconfigwidgets
+                kde-frameworks/kcoreaddons
+                kde-frameworks/knotifications
+                kde-frameworks/knotifyconfig
+                kde-frameworks/ktextwidgets
+                kde-frameworks/kxmlgui
+            )
         )
         libindicate? (
             dev-libs/indicate-qt[>=0.2.1]
