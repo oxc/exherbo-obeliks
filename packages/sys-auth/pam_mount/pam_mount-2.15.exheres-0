@@ -3,7 +3,7 @@
 # Based in part upon 'pam_mount-2.4.ebuild' from Gentoo, which is:
 #     Copyright 1999-2010 Gentoo Foundation
 
-require sourceforge [ project=${PN/_/-} suffix=tar.xz ] multilib
+require sourceforge [ project=${PN/_/-} suffix=tar.xz ]
 
 SLOT="0"
 LICENCES="|| ( GPL-3 LGPL-3 )"
@@ -47,7 +47,12 @@ DEPENDENCIES="
 "
 
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "ssl crypto" "crypt cryptsetup" )
-DEFAULT_SRC_CONFIGURE_PARAMS=( --with-slibdir="/${LIBDIR}" --with-dtd )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --with-dtd
+    --with-slibdir=/usr/$(exhost --target)/lib
+    --with-ssbindir=/usr/$(exhost --target)/bin
+    --with-rundir=/run
+)
 
 src_install() {
     default
