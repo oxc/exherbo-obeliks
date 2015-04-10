@@ -24,8 +24,13 @@ DEPENDENCIES="
         dev-util/pkg-config
         dev-util/intltool
     build+run:
-        media-gfx/gimp[>=2.4]
+        media-gfx/gimp[>=2.8]
         media-libs/liblqr[>=0.4.1]
         sys-devel/gettext
 "
 
+src_prepare() {
+     # don't install locales to /usr/${target}/share
+     # drop if po/Makefile.in.in doesn't have 'itlocaledir = $(prefix)/$(DATADIRNAME)/locale'
+     edo intltoolize --force --copy --automake
+}
