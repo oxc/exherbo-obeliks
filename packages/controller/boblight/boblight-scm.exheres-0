@@ -19,6 +19,7 @@ PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     X
     portaudio
+    usb
     (
         ffmpeg
         opengl
@@ -31,6 +32,7 @@ DEPENDENCIES="
         ffmpeg? ( media/ffmpeg[<2] )
         opengl? ( x11-dri/mesa )
         portaudio? ( media-libs/portaudio )
+        usb? ( dev-libs/libusb:1 )
 "
 
 
