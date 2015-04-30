@@ -1,4 +1,4 @@
-From ee721ebc027a0bfb6101ef6d0910c0d87466faf2 Mon Sep 17 00:00:00 2001
+From 9309222032d49e57c6e2bf246dc22ff98d392247 Mon Sep 17 00:00:00 2001
 From: Bernhard Frauendienst <exherbo@nospam.obeliks.de>
 Date: Wed, 26 Feb 2014 21:54:31 +0100
 Subject: [PATCH] Fix dependency checks in configure script
@@ -6,14 +6,14 @@ Subject: [PATCH] Fix dependency checks in configure script
 Reported upstream, see https://code.google.com/p/boblight/issues/detail?id=53
 
 ---
- configure.ac | 57 ++++++++++++++++++++++++++++++++-------------------------
- 1 file changed, 32 insertions(+), 25 deletions(-)
+ configure.ac | 59 +++++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 33 insertions(+), 26 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 4ce49f6..fedac73 100644
+index 4ce49f6..600ffc1 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -24,19 +24,22 @@ AC_CHECK_DECL([clock_gettime], AC_DEFINE([HAVE_CLOCK_GETTIME], [1], [ ]), [], [[
+@@ -24,28 +24,31 @@ AC_CHECK_DECL([clock_gettime], AC_DEFINE([HAVE_CLOCK_GETTIME], [1], [ ]), [], [[
  dnl boblightd
  AC_ARG_WITH([portaudio], [AS_HELP_STRING([--without-portaudio], [Disable portaudio support (no support for sound devices)])], [],
              [with_portaudio=check])
@@ -40,7 +40,9 @@ index 4ce49f6..fedac73 100644
  AC_CHECK_LIB([usb-1.0],[main],AC_DEFINE([HAVE_LIBUSB], [1], [ ]))
  AC_CHECK_LIB([usb-1.0],[libusb_error_name],AC_DEFINE([HAVE_LIBUSB_ERROR_NAME], [1], [ ]))
  AC_CHECK_HEADERS([libusb-1.0/libusb.h],[],[AC_MSG_ERROR([Missing a required header, please install it])])
-@@ -45,7 +48,7 @@ AM_CONDITIONAL(HAVE_LIBUSB, [test "x$with_libusb" = xcheck])
+ ])
+-AM_CONDITIONAL(HAVE_LIBUSB, [test "x$with_libusb" = xcheck])
++AM_CONDITIONAL(HAVE_LIBUSB, [test "x$with_libusb" = xyes])
  
  AC_ARG_WITH([spi], [AS_HELP_STRING([--without-spi], [Disable spi support (no support for LPD8806)])], [],
              [with_spi=check])
@@ -141,5 +143,5 @@ index 4ce49f6..fedac73 100644
 +AS_IF([test "x$with_x11" != xyes], [AC_MSG_WARN([--without-x11 passed, boblight-X11 and boblight-v4l will not be built])])
  
 -- 
-1.9.0
+2.3.3
 
