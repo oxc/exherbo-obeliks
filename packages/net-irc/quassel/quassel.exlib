@@ -1,0 +1,134 @@
+# Copyright 2008 Arne Janbu <arnej@ampheus.de>
+# Copyright 2010 Joonas Sarajärvi <muepsj@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 cmake_minimum_version=2.8.9 ]
+
+export_exlib_phases src_prepare src_install
+
+SUMMARY="Quassel is a Qt based IRC-client using a client-server architecture"
+HOMEPAGE="http://quassel-irc.org/"
+DOWNLOADS="${HOMEPAGE}pub/${PNV}.tar.bz2"
+
+LICENCES="GPL-3"
+SLOT="0"
+
+LANGS="cs da de el en_GB es fi fr gl hu it ja nb nl oc pt_BR pt ru sl sq sv tr uk zh_CN"
+MYOPTIONS="
+    baselayout
+    client [[ description = [ Build the core-dependent Quassel client ] ]]
+    core [[ description = [ Build the Quassel core ] ]]
+    dbus [[ description = [ Use dbus for desktop integration features ] ]]
+    kde [[ description = [ Integrate better with KDE ] ]]
+    libindicate [[ description = [ Use libindicate for Ayatana notifications ] ]]
+    monolithic [[ description = [ Build a standalone IRC client ] ]]
+    phonon [[ description = [ Use the phonon multimedia API instead of whole kdelibs ] ]]
+    ( qt4 qt5 ) [[ number-selected = exactly-one ]]
+    webkit [[ description = [ Use Webkit for URL previews ] ]]
+
+    baselayout [[ requires = core ]]
+    dbus? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    kde? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    libindicate? ( ( client monolithic ) [[ number-selected = at-least-one ]] ) [[ requires = qt4 ]]
+    phonon? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    webkit? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+
+    ( client core monolithic ) [[ number-selected = at-least-one ]]
+    ( kde phonon ) [[ number-selected = at-most-one ]]
+
+    linguas: ${LANGS}
+"
+DEPENDENCIES="
+    build+run:
+        qt4? (
+            x11-libs/qt:4[>=4.6][ssl(+)]
+        )
+        qt5? (
+            x11-libs/qtbase:5[>=5.2][?gui(+)]
+            x11-libs/qtscript:5
+        )
+
+        client? (
+            qt5? (
+                x11-libs/qtbase:5[gui(+)]
+            )
+        )
+        core? (
+            qt4? (
+                x11-libs/qt:4[sqlite]
+            )
+            qt5? (
+                x11-libs/qtbase:5[?gui(+)][sqlite]
+            )
+        )
+        dbus? (
+            x11-libs/dbusmenu-qt
+            qt4? (
+                x11-libs/qt:4[dbus]
+            )
+        )
+        kde? (
+            kde/kdelibs:4[>=4.1]
+        )
+        libindicate? (
+            dev-libs/indicate-qt[>=0.2.1]
+        )
+        monolithic? (
+            qt5? (
+                x11-libs/qtbase:5[gui(+)]
+            )
+        )
+        phonon? (
+            media-libs/phonon
+        )
+        webkit? (
+            qt4? (
+                x11-libs/qt:4[webkit]
+            )
+            qt5? (
+                x11-libs/qtwebkit:5
+            )
+        )
+"
+
+CMAKE_SRC_CONFIGURE_OPTION_DISABLE_FINDS=(
+    'dbus $(option qt4 && echo dbusmenu-qt || echo dbusmenu-qt5)'
+    'libindicate IndicateQt'
+    'phonon $(option qt4 && echo Phonon || echo Phonon4Qt5)'
+)
+
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
+    'kde KDE'
+    'webkit WEBKIT'
+)
+
+CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
+    'client QTCLIENT'
+    'core CORE'
+    'monolithic MONO'
+)
+
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'qt5 USE_QT5'
+)
+
+quassel_src_prepare() {
+    for lang in ${LANGS}; do
+        if optionq linguas:${lang} ; then
+            QUASSELLANGS+="${lang}"
+        fi
+    done
+    export LINGUAS=${QUASSELLANGS}
+}
+
+quassel_src_install() {
+    cmake_src_install
+
+    if option baselayout ; then
+        if optionq core ; then
+            newinitd "${FILES}"/quasselcore quasselcore
+            newconfd "${FILES}"/quasselcore.conf quasselcore
+        fi
+    fi
+}
+
