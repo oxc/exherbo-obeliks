@@ -2,13 +2,13 @@
 # Copyright 2010 Joonas Sarajärvi <muepsj@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake [ api=2 cmake_minimum_version=2.8.9 ]
+require github cmake [ api=2 cmake_minimum_version=2.8.9 ]
 
 export_exlib_phases src_prepare src_install
 
 SUMMARY="Quassel is a Qt based IRC-client using a client-server architecture"
 HOMEPAGE="http://quassel-irc.org/"
-DOWNLOADS="${HOMEPAGE}pub/${PNV}.tar.bz2"
+ever is_scm || DOWNLOADS="${HOMEPAGE}pub/${PNV}.tar.bz2"
 
 LICENCES="GPL-3"
 SLOT="0"
