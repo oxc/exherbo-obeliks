@@ -11,7 +11,11 @@ in forms, adding notes, etc. In batch mode, it can be used to automate form fill
 HOMEPAGE="http://flpsed.org/flpsed.html"
 DOWNLOADS="http://www.ecademix.com/JohannesHofmann/${PNV}.tar.gz"
 
-LICENCES="GPL"
+# The source repository contains a committed symlink to
+# /usr/share/automake-1.14/COPYING, which is GPL-3,
+# and their homepage just links to the main FSF GPL page.
+# They should probably be slapped roughly for sloppiness.
+LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 
