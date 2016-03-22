@@ -19,7 +19,5 @@ DEPENDENCIES="
         app-arch/xz
 "
 
-REMOTE_IDS="freshmeat:libHX"
-
 WORK="${WORKBASE}/${MY_PNV}"
 
