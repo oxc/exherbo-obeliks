@@ -101,10 +101,6 @@ DEPENDENCIES="
         )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}/0001-Fix-build-with-Qt-5.5.patch"
-)
-
 CMAKE_SRC_CONFIGURE_OPTION_DISABLE_FINDS=(
     'dbus $(option qt4 && echo dbusmenu-qt || echo dbusmenu-qt5)'
     'libindicate IndicateQt'
