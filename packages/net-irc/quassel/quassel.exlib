@@ -122,6 +122,12 @@ CMAKE_SRC_CONFIGURE_OPTIONS=(
     'qt5 USE_QT5'
 )
 
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    # ssl is always enabled on exherbo qt, and auto-detection fails
+    # with qt5 due to http://bugs.quassel-irc.org/issues/1401
+    '-DHAVE_SSL:BOOL=TRUE'
+)
+
 quassel_src_prepare() {
     cmake_src_prepare
 
