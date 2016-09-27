@@ -4,6 +4,7 @@ Date: Wed, 26 Feb 2014 21:54:31 +0100
 Subject: [PATCH] Fix dependency checks in configure script
 
 Reported upstream, see https://code.google.com/p/boblight/issues/detail?id=53
+Reported upstream, see https://github.com/bobo1on1/boblight/issues/53
 
 ---
  configure.ac | 59 +++++++++++++++++++++++++++++++++--------------------------

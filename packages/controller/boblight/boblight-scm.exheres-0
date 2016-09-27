@@ -1,8 +1,7 @@
 # Copyright 2011 Bernhard Frauendienst
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="http://boblight.googlecode.com/svn/"
-require scm-svn googlecode autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require github [ user=bobo1on1 ] autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
 
 SUMMARY="Boblight is a collection of tools for driving lights connected to an external controller."
 DESCRIPTION="
