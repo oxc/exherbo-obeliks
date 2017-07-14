@@ -1,0 +1,7 @@
+# Copyright 2017 Bernhard Frauendienst
+# Distributed under the terms of the GNU General Public License v2
+
+require nvme-cli
+
+PLATFORMS="amd64"
+

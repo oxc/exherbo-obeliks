@@ -1,0 +1,29 @@
+
+# Copyright 2017 Bernhard Frauendienst
+# Distributed under the terms of the GNU General Public License v2
+
+if ever is_scm ; then
+    GITHUB_BRANCH=master
+else
+    MY_PV="v${PV}"
+fi
+
+require github [ user='linux-nvme' ]
+
+SUMMARY="NVMe management command line interface."
+
+LICENCES="GPL-2"
+SLOT="0"
+
+DEPENDENCIES="
+    build:
+    build+run:
+"
+
+BUGS_TO="exherbo@nospam.obeliks.de"
+
+# tests require yet unpackaged dependencies (e.g. nose2)
+RESTRICT="test"
+
+DEFAULT_SRC_INSTALL_PARAMS=( PREFIX=/usr SBINDIR=/usr/$(exhost --target)/bin )
+
