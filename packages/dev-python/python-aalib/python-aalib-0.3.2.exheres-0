@@ -21,5 +21,5 @@ DEPENDENCIES="
 "
 
 test_one_multibuild() {
-    edo ${PYTHON} -B test/test.py
+    PYTHONPATH="$(ls -d build/lib*)" edo ${PYTHON} -B test/test.py
 }
