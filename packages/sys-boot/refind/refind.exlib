@@ -56,8 +56,6 @@ UPSTREAM_DOCUMENTATION="
     ]]
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/efiprot.patch" )
-
 refind_src_prepare() {
     default
 
