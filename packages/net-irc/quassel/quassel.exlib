@@ -20,16 +20,13 @@ MYOPTIONS="
     core [[ description = [ Build the Quassel core ] ]]
     dbus [[ description = [ Use dbus for desktop integration features ] ]]
     kde [[ description = [ Integrate better with KDE ] ]]
-    libindicate [[ description = [ Use libindicate for Ayatana notifications ] ]]
     monolithic [[ description = [ Build a standalone IRC client ] ]]
     phonon [[ description = [ Use the phonon multimedia API instead of whole kdelibs ] ]]
-    ( qt4 qt5 ) [[ number-selected = exactly-one ]]
     webkit [[ description = [ Use Webkit for URL previews ] ]]
 
     baselayout [[ requires = core ]]
     dbus? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
     kde? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
-    libindicate? ( ( client monolithic ) [[ number-selected = at-least-one ]] ) [[ requires = qt4 ]]
     phonon? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
     webkit? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
 
@@ -40,71 +37,40 @@ MYOPTIONS="
 "
 DEPENDENCIES="
     build+run:
-        qt4? (
-            x11-libs/qt:4[>=4.6][ssl(+)]
-        )
-        qt5? (
-            x11-libs/qtbase:5[>=5.2][?gui(+)]
-            x11-libs/qtscript:5
-        )
+        x11-libs/qtbase:5[>=5.2][?gui(+)]
+        x11-libs/qtscript:5
 
         client? (
-            qt5? (
-                x11-libs/qtbase:5[gui(+)]
-            )
+            x11-libs/qtbase:5[gui(+)]
         )
         core? (
-            qt4? (
-                x11-libs/qt:4[sqlite]
-            )
-            qt5? (
-                x11-libs/qtbase:5[?gui(+)][sqlite]
-            )
+            x11-libs/qtbase:5[?gui(+)][sqlite]
         )
         dbus? (
             x11-libs/dbusmenu-qt
-            qt4? (
-                x11-libs/qt:4[dbus]
-            )
         )
         kde? (
-            qt4? (
-                kde/kdelibs:4[>=4.1]
-            )
-            qt5? (
-                kde-frameworks/kconfigwidgets
-                kde-frameworks/kcoreaddons
-                kde-frameworks/knotifications
-                kde-frameworks/knotifyconfig
-                kde-frameworks/ktextwidgets
-                kde-frameworks/kxmlgui
-            )
-        )
-        libindicate? (
-            dev-libs/indicate-qt[>=0.2.1]
+            kde-frameworks/kconfigwidgets
+            kde-frameworks/kcoreaddons
+            kde-frameworks/knotifications
+            kde-frameworks/knotifyconfig
+            kde-frameworks/ktextwidgets
+            kde-frameworks/kxmlgui
         )
         monolithic? (
-            qt5? (
-                x11-libs/qtbase:5[gui(+)]
-            )
+            x11-libs/qtbase:5[gui(+)]
         )
         phonon? (
             media-libs/phonon
         )
         webkit? (
-            qt4? (
-                x11-libs/qt:4[webkit]
-            )
-            qt5? (
-                x11-libs/qtwebkit:5
-            )
+            x11-libs/qtwebkit:5
         )
 "
 
 CMAKE_SRC_CONFIGURE_OPTION_DISABLE_FINDS=(
-    'dbus $(option qt4 && echo dbusmenu-qt || echo dbusmenu-qt5)'
-    'libindicate IndicateQt'
-    'phonon $(option qt4 && echo Phonon || echo Phonon4Qt5)'
+    'dbus dbusmenu-qt5'
+    'phonon Phonon4Qt5'
 )
 
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
@@ -118,14 +84,11 @@ CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
     'monolithic MONO'
 )
 
-CMAKE_SRC_CONFIGURE_OPTIONS=(
-    'qt5 USE_QT5'
-)
-
 CMAKE_SRC_CONFIGURE_PARAMS=(
     # ssl is always enabled on exherbo qt, and auto-detection fails
     # with qt5 due to http://bugs.quassel-irc.org/issues/1401
     '-DHAVE_SSL:BOOL=TRUE'
+    '-DUSE_QT5:BOOL=TRUE'
 )
 
 quassel_src_prepare() {
