@@ -36,6 +36,8 @@ MYOPTIONS="
     linguas: ${LANGS}
 "
 DEPENDENCIES="
+    build:
+        x11-libs/qttools:5 [[ note = [ lconvert and lrelease for translations ] ]]
     build+run:
         x11-libs/qtbase:5[>=5.2][?gui(+)]
         x11-libs/qtscript:5
@@ -44,24 +46,26 @@ DEPENDENCIES="
             x11-libs/qtbase:5[gui(+)]
         )
         core? (
+            app-crypt/qca[qt5]
             x11-libs/qtbase:5[?gui(+)][sqlite]
         )
         dbus? (
-            x11-libs/dbusmenu-qt
+            x11-libs/dbusmenu-qt[qt5]
         )
         kde? (
-            kde-frameworks/kconfigwidgets
-            kde-frameworks/kcoreaddons
-            kde-frameworks/knotifications
-            kde-frameworks/knotifyconfig
-            kde-frameworks/ktextwidgets
-            kde-frameworks/kxmlgui
+            kde-frameworks/kconfigwidgets:5
+            kde-frameworks/kcoreaddons:5
+            kde-frameworks/knotifications:5
+            kde-frameworks/knotifyconfig:5
+            kde-frameworks/ktextwidgets:5
+            kde-frameworks/kwidgetsaddons:5
+            kde-frameworks/kxmlgui:5
         )
         monolithic? (
             x11-libs/qtbase:5[gui(+)]
         )
         phonon? (
-            media-libs/phonon
+            media-libs/phonon[qt5]
         )
         webkit? (
             x11-libs/qtwebkit:5
