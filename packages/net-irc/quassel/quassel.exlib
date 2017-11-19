@@ -37,7 +37,7 @@ MYOPTIONS="
 "
 DEPENDENCIES="
     build:
-        x11-libs/qttools:5 [[ note = [ lconvert and lrelease for translations ] ]]
+        x11-libs/qttools:5[?gui(+)] [[ note = [ lconvert and lrelease for translations ] ]]
     build+run:
         x11-libs/qtbase:5[>=5.2][?gui(+)]
         x11-libs/qtscript:5
