@@ -2,7 +2,7 @@
 # Copyright 2010 Joonas Sarajärvi <muepsj@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github cmake [ api=2 cmake_minimum_version=2.8.9 ]
+require github cmake [ api=2 cmake_minimum_version=2.8.12 ]
 
 export_exlib_phases src_prepare src_install
 
@@ -22,13 +22,13 @@ MYOPTIONS="
     kde [[ description = [ Integrate better with KDE ] ]]
     monolithic [[ description = [ Build a standalone IRC client ] ]]
     phonon [[ description = [ Use the phonon multimedia API instead of whole kdelibs ] ]]
-    webkit [[ description = [ Use Webkit for URL previews ] ]]
+    webengine [[ description = [ Use QtWebengine for URL previews ] ]]
 
     baselayout [[ requires = core ]]
     dbus? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
     kde? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
     phonon? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
-    webkit? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
+    webengine? ( ( client monolithic ) [[ number-selected = at-least-one ]] )
 
     ( client core monolithic ) [[ number-selected = at-least-one ]]
     ( kde phonon ) [[ number-selected = at-most-one ]]
@@ -67,8 +67,8 @@ DEPENDENCIES="
         phonon? (
             media-libs/phonon[qt5]
         )
-        webkit? (
-            x11-libs/qtwebkit:5
+        webengine? (
+            x11-libs/qtwebengine:5
         )
 "
 
@@ -79,7 +79,7 @@ CMAKE_SRC_CONFIGURE_OPTION_DISABLE_FINDS=(
 
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'kde KDE'
-    'webkit WEBKIT'
+    'webengine WEBENGINE'
 )
 
 CMAKE_SRC_CONFIGURE_OPTION_WANTS=(
