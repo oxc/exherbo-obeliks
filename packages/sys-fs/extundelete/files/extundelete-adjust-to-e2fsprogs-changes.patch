@@ -1,0 +1,16 @@
+Upstream: No, seems dead
+Author: Unknown
+Source: https://raw.githubusercontent.com/void-linux/void-packages/de4d0fd50000d890661ef35b440dee09b57ac099/srcpkgs/extundelete/patches/fix-ftbfs.patch
+Reason: Fix build with e2fsprogs[>=1.44]
+--- src/insertionops.cc
++++ src/insertionops.cc
+@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& o
+   os << "File flags: " << inode.i_flags << std::endl;
+   os << "File version (for NFS): " << inode.i_generation << std::endl;
+   os << "File ACL: " << inode.i_file_acl << std::endl;
+-  os << "Directory ACL: " << inode.i_dir_acl << std::endl;
++  os << "Directory ACL: " << inode.i_size_high << std::endl;
+   os << "Fragment address: " << inode.i_faddr << std::endl;
+   os << "Direct blocks: ";
+   for (int n = 0; n < EXT2_NDIR_BLOCKS; n++)
+
