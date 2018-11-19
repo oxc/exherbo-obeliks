@@ -4,7 +4,9 @@
 
 require github cmake [ api=2 cmake_minimum_version=2.8.12 ]
 
-export_exlib_phases src_prepare src_install
+export_exlib_phases pkg_pretend src_prepare src_install
+
+QUASSEL_MAJOR_VERSION=$(ever range 1-2)
 
 SUMMARY="Quassel is a Qt based IRC-client using a client-server architecture"
 HOMEPAGE="http://quassel-irc.org/"
@@ -53,6 +55,7 @@ DEPENDENCIES="
             x11-libs/dbusmenu-qt[qt5]
         )
         kde? (
+            kde-frameworks/breeze-icons:5
             kde-frameworks/kconfigwidgets:5
             kde-frameworks/kcoreaddons:5
             kde-frameworks/knotifications:5
@@ -60,6 +63,7 @@ DEPENDENCIES="
             kde-frameworks/ktextwidgets:5
             kde-frameworks/kwidgetsaddons:5
             kde-frameworks/kxmlgui:5
+            kde-frameworks/sonnet:5
         )
         monolithic? (
             x11-libs/qtbase:5[gui(+)]
@@ -79,6 +83,7 @@ CMAKE_SRC_CONFIGURE_OPTION_DISABLE_FINDS=(
 
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
     'kde KDE'
+    '!kde BUNDLED_ICONS'
     'webengine WEBENGINE'
 )
 
@@ -93,7 +98,23 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     # with qt5 due to http://bugs.quassel-irc.org/issues/1401
     '-DHAVE_SSL:BOOL=TRUE'
     '-DUSE_QT5:BOOL=TRUE'
+    '-DWITH_OXYGEN_ICONS:BOOL=FALSE'
 )
+
+quassel_pkg_pretend() {
+    if optionq core || optionq monolithic; then
+        if [[ -z ${QUASSEL_MAJOR_UPGRADE} ]] && has_version --root ${CATEGORY}/${PN} && \
+            ! has_version --root ${CATEGORY}/${PN}[=${QUASSEL_MAJOR_VERSION}*] ; then
+            ewarn "Upgrading to a different major version of Quassel core/monolith will cause a database"
+            ewarn "upgrade, which can possibly take several hours on large databases, and during which"
+            ewarn "the core is not usable. You also cannot downgrade to a lower version after the"
+            ewarn "upgrade. You should create a backup of your database before upgrading."
+            ewarn "When you've done this, please set 'QUASSEL_MAJOR_UPGRADE=YesPlease', to continue the upgrade."
+            ewarn "For more information visit https://quassel-irc.org/."
+            die "Backup your databases before doing a major version upgrade of Quassel."
+        fi
+    fi
+}
 
 quassel_src_prepare() {
     cmake_src_prepare
@@ -109,7 +130,7 @@ quassel_src_prepare() {
 quassel_src_install() {
     cmake_src_install
 
-    if option baselayout ; then
+    if optionq baselayout ; then
         if optionq core ; then
             newinitd "${FILES}"/quasselcore quasselcore
             newconfd "${FILES}"/quasselcore.conf quasselcore
