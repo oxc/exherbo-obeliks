@@ -48,11 +48,11 @@ DEPENDENCIES="
             x11-libs/qtbase:5[gui(+)]
         )
         core? (
-            app-crypt/qca[qt5]
+            app-crypt/qca[qt5(+)]
             x11-libs/qtbase:5[?gui(+)][sqlite]
         )
         dbus? (
-            x11-libs/dbusmenu-qt[qt5]
+            x11-libs/dbusmenu-qt[qt5(+)]
         )
         kde? (
             kde-frameworks/breeze-icons:5
@@ -69,7 +69,7 @@ DEPENDENCIES="
             x11-libs/qtbase:5[gui(+)]
         )
         phonon? (
-            media-libs/phonon[qt5]
+            media-libs/phonon[qt5(+)]
         )
         webengine? (
             x11-libs/qtwebengine:5
