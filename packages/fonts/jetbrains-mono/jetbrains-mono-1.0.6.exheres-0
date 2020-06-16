@@ -1,0 +1,30 @@
+# Copyright 2020 Bernhard Frauendienst <exherbo@nospam.obeliks.de>
+# Distributed under the terms of the GNU General Public License v2
+
+FONT="jetbrains-mono"
+
+MY_PN=JetBrainsMono
+
+require github [ user=JetBrains release=v${PV} suffix=zip ] xfont
+
+SUMMARY="JetBrains Mono – the free and open-source typeface for developers"
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/unzip
+"
+
+src_install() {
+    insinto /usr/share/fonts/X11/${FONT}
+    doins ttf/*.ttf
+
+    # fontconfig configuration
+    insinto /usr/share/fontconfig/conf.avail
+    doins "${FILES}"/*.conf
+}
+
