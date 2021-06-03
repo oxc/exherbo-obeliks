@@ -132,7 +132,7 @@ refind_src_install() {
 }
 
 refind_pkg_postinst() {
-    elog "Please read /usr/share/docs/${PNVR}/README.txt and the"
+    elog "Please read /usr/share/doc/${PNVR}/README.txt and the"
     elog "refind-install(8) man page on how to use the refind-install"
     elog "script to install the boot loader."
 }
