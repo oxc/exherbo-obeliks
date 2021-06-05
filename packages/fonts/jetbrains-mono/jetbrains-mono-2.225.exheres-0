@@ -19,6 +19,8 @@ DEPENDENCIES="
         virtual/unzip
 "
 
+WORK="${WORKBASE}"/fonts
+
 src_install() {
     insinto /usr/share/fonts/X11/${FONT}
     doins ttf/*.ttf
