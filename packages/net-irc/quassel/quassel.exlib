@@ -48,7 +48,7 @@ DEPENDENCIES="
             x11-libs/qtbase:5[gui(+)]
         )
         core? (
-            app-crypt/qca[qt5(+)]
+            app-crypt/qca[providers:qt5]
             x11-libs/qtbase:5[?gui(+)][sqlite]
         )
         dbus? (
