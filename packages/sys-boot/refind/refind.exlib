@@ -40,7 +40,7 @@ DEPENDENCIES="
             description = [ To locate and mount an ESP ]
         ]]
     suggestion:
-        app-crypt/sbsigntool [[
+        app-crypt/sbsigntools [[
             description = [ For signing and verifying files for UEFI Secure Boot ]
         ]]
 "
