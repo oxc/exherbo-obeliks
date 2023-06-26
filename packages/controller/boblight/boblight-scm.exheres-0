@@ -17,18 +17,15 @@ SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     X
+    opengl [[ requires = X ]]
     portaudio
     usb
-    (
-        ffmpeg
-        opengl
-    ) [[ *requires = X ]]"
+"
 
 DEPENDENCIES="
     build:
     build+run:
         X? ( x11-libs/libX11 )
-        ffmpeg? ( media/ffmpeg[<2] )
         opengl? ( x11-dri/mesa )
         portaudio? ( media-libs/portaudio )
         usb? ( dev-libs/libusb:1 )
@@ -42,5 +39,9 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/automake-options.patch"
 )
 
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "X x11" "ffmpeg" "opengl" "portaudio" "usb libusb" )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --without-ffmpeg
+)
+
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "X x11" "opengl" "portaudio" "usb libusb" )
 
